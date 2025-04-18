@@ -152,8 +152,6 @@
     <button class="mode-btn" onclick="toggleMode()">다크모드</button>
   </div>
   <div id="signaturePreview">
-    <div style="transform: scale(0.9); transform-origin: top left; display: inline-block;">
-    </div>
   </div>
 </div>
 
@@ -186,6 +184,8 @@ function generateSignature() {
 </div>`.trim();
 
   const previewMessage = `
+
+    <div style="transform: scale(0.9); transform-origin: top left; display: inline-block;">
 <div style="
   font-size: 1em;
   line-height: 1.6;
@@ -202,7 +202,7 @@ function generateSignature() {
 </div>
 <div style="font-size: 1em; line-height: 1.6; font-weight: 500;">고맙습니다.<br>
   ${name} 드림
-</div>`;
+</div></div>`;
 
   document.getElementById("signatureOutput").value = html;
   document.getElementById("signaturePreview").innerHTML = previewMessage + html;
