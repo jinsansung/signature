@@ -34,7 +34,6 @@
     <option value="김건우">김건우</option>
     <option value="김예진">김예진</option>
     <option value="김주희">김주희</option>
-    <option value="나경희">나경희</option>
     <option value="문혜화">문혜화</option>
     <option value="박선민">박선민</option>
     <option value="변다정">변다정</option>
@@ -66,23 +65,34 @@
 
 <script>
 const people = {
-  "이재문": { en: "JM", title: "DIRECTOR", deptEn: "Business Management Team", deptKr: "사업관리팀", phone: "010-5268-5438", email: "jm.arena@kakaocorp.com" },
-  "김주희": { en: "LILY", title: "KREW", deptEn: "Design Team", deptKr: "디자인팀", phone: "010-7176-9664", email: "lily.arena@kakaocorp.com" },
-  "변다정": { en: "BONNIE", title: "DIRECTOR", deptEn: "Marketing Team", deptKr: "마케팅팀", phone: "010-9159-8534", email: "bonnie.arena@kakaocorp.com" },
-  "양주아": { en: "JUA", title: "ASST.MANAGER", deptEn: "Finance Team", deptKr: "재무팀", phone: "010-9992-2942", email: "jua.arena@kakaocorp.com" },
-  "유현영": { en: "HARPER", title: "ASST.MANAGER", deptEn: "Business Development Division", deptKr: "", phone: "010-9853-0150", email: "harper.arena@kakaocorp.com" },
-  "김예진": { en: "KAILEY", title: "DIRECTOR", deptEn: "Live Business Team", deptKr: "공연사업팀", phone: "010-7336-3149", email: "kailey.arena@kakaocorp.com" },
-  "김건우": { en: "ALEX", title: "DIRECTOR", deptEn: "HR Team", deptKr: "인사팀", phone: "010-8535-8037", email: "alex.arena@kakaocorp.com" },
-  "성진산": { en: "JAYE", title: "DIRECTOR", deptEn: "Design Team", deptKr: "디자인팀", phone: "010-2637-7049", email: "jaye.arena@kakaocorp.com" },
-  "문혜화": { en: "NIKI", title: "DIRECTOR", deptEn: "Contents Team", deptKr: "컨텐츠팀", phone: "010-9676-4232", email: "niki.arena@kakaocorp.com" },
-  "오만석": { en: "MASON", title: "DIRECTOR", deptEn: "Retail Team", deptKr: "리테일팀", phone: "010-9454-9238", email: "mason.arena@kakaocorp.com" },
-  "박선민": { en: "LAYLA", title: "SENIOR MANAGER", deptEn: "Business Development Division", deptKr: "", phone: "010-9585-6649", email: "layla.arena@kakaocorp.com" },
-  "장소라": { en: "BELLA", title: "ASST.MANAGER", deptEn: "HR Team", deptKr: "인사팀", phone: "010-4840-3175", email: "bella.arena@kakaocorp.com" },
-  "이준우": { en: "EDDIE", title: "DIRECTOR", deptEn: "Finance Team", deptKr: "재무팀", phone: "010-4489-1050", email: "eddie.arena@kakaocorp.com" },
-  "나경희": { en: "KAY", title: "CCO", deptEn: "Experience Strategy Division", deptKr: "", phone: "010-3413-9230", email: "kay.arena@kakaocorp.com" },
-  "이우재": { en: "PAUL", title: "CFO", deptEn: "Business Operations Division", deptKr: "", phone: "010-8615-9579", email: "paul.arena@kakaocorp.com" },
-  "홍성환": { en: "HENRY", title: "COO", deptEn: "Business Development Division", deptKr: "", phone: "010-8652-4294", email: "henry.arena@kakaocorp.com" },
-  "오지훈": { en: "OWEN", title: "CEO", deptEn: "Seoul Arena", deptKr: "", phone: "010-9233-9454", email: "owen.arena@kakaocorp.com" }
+  "이재문": { en: "JM", title: "DIRECTOR", deptEn: "Business Management Team", phone: "010-5268-5438", email: "jm.arena@kakaocorp.com" },
+  "김주희": { en: "LILY", title: "KREW", deptEn: "Design Team", phone: "010-7176-9664", email: "lily.arena@kakaocorp.com" },
+  "변다정": { en: "BONNIE", title: "DIRECTOR", deptEn: "Marketing Team", phone: "010-9159-8534", email: "bonnie.arena@kakaocorp.com" },
+  "양주아": { en: "JUA", title: "ASST. MANAGER", deptEn: "Finance Team", phone: "010-9992-2942", email: "jua.arena@kakaocorp.com" },
+  "유현영": { en: "HARPER", title: "ASST. MANAGER", deptEn: "Business Development Division", phone: "010-9853-0150", email: "harper.arena@kakaocorp.com" },
+  "김예진": { en: "KAILEY", title: "DIRECTOR", deptEn: "Live Business Team", phone: "010-7336-3149", email: "kailey.arena@kakaocorp.com" },
+  "김건우": { en: "ALEX", title: "DIRECTOR", deptEn: "HR Team", phone: "010-8535-8037", email: "alex.arena@kakaocorp.com" },
+  "성진산": { en: "JAYE", title: "DIRECTOR", deptEn: "Design Team", phone: "010-2637-7049", email: "jaye.arena@kakaocorp.com" },
+  "문혜화": { en: "NIKI", title: "DIRECTOR", deptEn: "Contents Team", phone: "010-9676-4232", email: "niki.arena@kakaocorp.com" },
+  "오만석": { en: "MASON", title: "DIRECTOR", deptEn: "Retail Team", phone: "010-9454-9238", email: "mason.arena@kakaocorp.com" },
+  "박선민": { en: "LAYLA", title: "SENIOR MANAGER", deptEn: "Business Development Division", phone: "010-9585-6649", email: "layla.arena@kakaocorp.com" },
+  "장소라": { en: "BELLA", title: "ASST. MANAGER", deptEn: "HR Team", phone: "010-4840-3175", email: "bella.arena@kakaocorp.com" },
+  "이준우": { en: "EDDIE", title: "DIRECTOR", deptEn: "Finance Team", phone: "010-4489-1050", email: "eddie.arena@kakaocorp.com" },
+  "나경희": { en: "KAY", title: "CCO", deptEn: "Experience Strategy Division", phone: "010-3413-9230", email: "kay.arena@kakaocorp.com" },
+  "이우재": { en: "PAUL", title: "CFO", deptEn: "Business Operations Division", phone: "010-8615-9579", email: "paul.arena@kakaocorp.com" },
+  "홍성환": { en: "HENRY", title: "COO", deptEn: "Business Development Division", phone: "010-8652-4294", email: "henry.arena@kakaocorp.com" },
+  "오지훈": { en: "OWEN", title: "CEO", deptEn: "Seoul Arena", phone: "010-9233-9454", email: "owen.arena@kakaocorp.com" }
+};
+
+const titleToKr = {
+  "CEO": "대표이사",
+  "CCO": "상무",
+  "CFO": "상무",
+  "COO": "상무",
+  "SENIOR MANAGER": "차장",
+  "DIRECTOR": "팀장",
+  "ASST. MANAGER": "대리",
+  "KREW": "사원"
 };
 
 function generateSignature() {
@@ -95,12 +105,13 @@ function generateSignature() {
 
   const p = people[name];
   const phoneInternational = "+82 " + p.phone.replace(/^010-/, "10-");
+  const krTitle = titleToKr[p.title] || "";
 
   const html = `
 <table style="width:100%; border-top:1px solid; font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size:11px; line-height:1.4; text-align:left; border-collapse:collapse; margin-top:30px;">
   <tr><td height="10"></td></tr>
-  <tr><td><b>${name} &nbsp;|&nbsp; ${p.en}</b></td></tr>
-  <tr><td>${p.title} - ${p.deptEn}${p.deptKr ? " (" + p.deptKr + ")" : ""}</td></tr>
+  <tr><td><b>${name}${krTitle ? ' ' + krTitle : ''}  |  ${p.en}</b></td></tr>
+  <tr><td>${p.title.toUpperCase()} - ${p.deptEn.toUpperCase()}</td></tr>
   <tr><td height="10"></td></tr>
   <tr>
     <td>
