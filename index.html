@@ -5,137 +5,55 @@
   <title>서울아레나 서명 생성</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    :root {
-      --bg: #fff;
-      --text: #000;
-      --border: #ccc;
-    }
-
-    body {
-      font-family: 'Apple SD Gothic Neo', sans-serif;
-      padding: 24px;
-      max-width: 720px;
-      margin: auto;
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    .form-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    label {
-      flex: 0 0 60px;
-      font-size: 0.9em;
-    }
-
-    input {
-      flex: 1;
-      padding: 8px;
-      border: 1px solid var(--border);
-      border-radius: 0;
-      box-sizing: border-box;
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    .code-block, .preview-container {
-      position: relative;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 0;
-      margin-top: 20px;
-    }
-
-    .header-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 12px;
-      background: none;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.9em;
-      color: #444;
-    }
-
-    .copy-btn, .mode-btn {
-      font-size: 0.85em;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #333;
-    }
-
-    .copy-btn:active, .mode-btn:active {
-      color: green;
-    }
-
-    textarea {
-      width: 100%;
-      height: 160px;
-      font-family: monospace;
-      font-size: 0.5em;
-      padding: 12px;
-      box-sizing: border-box;
-      resize: none;
-      border: none;
-      background: var(--bg);
-      color: var(--text);
-      overflow: auto;
-    }
-
-    #signaturePreview {
-      overflow: auto;
-      padding: 20px;
-    }
-
-    body.dark {
-      --bg: #1e1e1e;
-      --text: #e0e0e0;
-      --border: #444;
-    }
-
-    body.dark .header-bar {
-      border-color: #444;
-      color: #bbb;
-    }
-
-    body.dark textarea,
-    body.dark input {
-      background: #1e1e1e;
-      color: #e0e0e0;
-    }
-
-    body.dark .copy-btn,
-    body.dark .mode-btn {
-      color: #ccc;
-    }
+    :root { --bg: #fff; --text: #000; --border: #ccc; }
+    body { font-family: 'Apple SD Gothic Neo', sans-serif; padding: 24px; max-width: 720px; margin: auto; background: var(--bg); color: var(--text); }
+    .form-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+    label { flex: 0 0 80px; font-size: 0.9em; }
+    input, select { flex: 1; padding: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); box-sizing: border-box; }
+    .code-block, .preview-container { position: relative; background: var(--bg); border: 1px solid var(--border); margin-top: 20px; }
+    .header-bar { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 0.9em; color: #444; }
+    .copy-btn, .mode-btn { font-size: 0.85em; background: none; border: none; cursor: pointer; color: #333; }
+    textarea { width: 100%; height: 160px; font-family: monospace; font-size: 0.5em; padding: 12px; border: none; background: var(--bg); color: var(--text); resize: none; }
+    #signaturePreview { overflow: auto; padding: 20px; }
+    body.dark { --bg: #1e1e1e; --text: #e0e0e0; --border: #444; }
+    body.dark .header-bar { border-color: #444; color: #bbb; }
+    body.dark textarea, body.dark input, body.dark select { background: #1e1e1e; color: #e0e0e0; }
+    body.dark .copy-btn, body.dark .mode-btn { color: #ccc; }
   </style>
 </head>
 <body>
 
 <div class="form-row">
   <label>이름</label>
-  <input type="text" id="name" value="홍길동" onclick="clearOnClick(this)" oninput="generateSignature()">
+  <input type="text" id="name" value="홍길동" oninput="generateSignature()">
 </div>
+
 <div class="form-row">
   <label>직책</label>
-  <input type="text" id="title" value="팀장" onclick="clearOnClick(this)" oninput="generateSignature()">
+  <select id="title" onchange="updateDepartments(); generateSignature();">
+    <option>대표이사</option>
+    <option>실장</option>
+    <option>팀장</option>
+    <option>대리</option>
+    <option>사원</option>
+  </select>
 </div>
+
 <div class="form-row">
   <label>부서</label>
-  <input type="text" id="department" value="경영지원실 재무팀" onclick="clearOnClick(this)" oninput="generateSignature()">
+  <select id="department" onchange="generateSignature()">
+    <!-- JS에서 동적 생성 -->
+  </select>
 </div>
+
 <div class="form-row">
   <label>전화</label>
-  <input type="text" id="phone" value="010-0000-0000" onclick="clearOnClick(this)" oninput="generateSignature()">
+  <input type="text" id="phone" value="010-0000-0000" oninput="generateSignature()">
 </div>
+
 <div class="form-row">
   <label>이메일</label>
-  <input type="text" id="email" value="gildong.arena@kakaocorp.com" onclick="clearOnClick(this)" oninput="generateSignature()">
+  <input type="text" id="email" value="gildong.arena@kakaocorp.com" oninput="generateSignature()">
 </div>
 
 <div class="code-block">
@@ -151,37 +69,84 @@
     <div>미리보기</div>
     <button class="mode-btn" onclick="toggleMode()">다크모드</button>
   </div>
-  <div id="signaturePreview">
-  </div>
+  <div id="signaturePreview"></div>
 </div>
 
 <script>
-function clearOnClick(field) {
-  if (!field.dataset.clicked) {
-    field.value = '';
-    field.dataset.clicked = true;
-    generateSignature();
+const titleMap = {
+  "대표이사": "CEO",
+  "실장": "CXO",  // 기본, 실장+부서 조합에서 변경
+  "팀장": "Director",
+  "대리": "Asst. Manager",
+  "사원": "Krew"
+};
+
+const departments = [
+  "서울아레나", "사업추진실", "경영지원실", "경험기획실",
+  "공연사업팀", "마케팅팀", "리테일팀", "컨텐츠팀",
+  "디자인팀", "재무팀", "인사팀", "사업관리팀"
+];
+
+const departmentMap = {
+  "서울아레나": "Seoul Arena",
+  "사업추진실": "Business Development Division",
+  "경영지원실": "Business Operations Division",
+  "경험기획실": "Experience Strategy Division",
+  "공연사업팀": "Live Business Team",
+  "마케팅팀": "Marketing Team",
+  "리테일팀": "Retail Team",
+  "컨텐츠팀": "Content Team",
+  "디자인팀": "Design Team",
+  "재무팀": "Finance Team",
+  "인사팀": "HR Team",
+  "사업관리팀": "Business Management Team"
+};
+
+function updateDepartments() {
+  const title = document.getElementById("title").value;
+  const departmentSelect = document.getElementById("department");
+  departmentSelect.innerHTML = "";
+
+  let filtered = [];
+  if (title === "대표이사") {
+    filtered = ["서울아레나"];
+  } else if (title === "실장") {
+    filtered = ["사업추진실", "경영지원실", "경험기획실"];
+  } else if (title === "팀장") {
+    filtered = departments.filter(d => d.endsWith("팀"));
+  } else if (title === "대리" || title === "사원") {
+    filtered = departments.filter(d => d !== "서울아레나");
   }
+
+  filtered.forEach(dep => {
+    const opt = document.createElement("option");
+    opt.textContent = dep;
+    departmentSelect.appendChild(opt);
+  });
 }
 
 function generateSignature() {
   const name = document.getElementById("name").value || "홍길동";
-  const title = document.getElementById("title").value || "팀장";
-  const department = document.getElementById("department").value || "경영지원실 재무팀";
+  const titleKr = document.getElementById("title").value;
+  const departmentKr = document.getElementById("department").value;
   const phone = document.getElementById("phone").value || "010-0000-0000";
   const email = document.getElementById("email").value || "gildong.arena@kakaocorp.com";
 
   const phoneInternational = "+82 " + phone.replace(/^010-/, "10-");
+  let titleEn = "";
+
+  if (titleKr === "실장" && departmentKr === "사업추진실") titleEn = "COO";
+  else if (titleKr === "실장" && departmentKr === "경영지원실") titleEn = "CFO";
+  else if (titleKr === "실장" && departmentKr === "경험기획실") titleEn = "CCO";
+  else titleEn = titleMap[titleKr] || titleKr;
+
+  const departmentEn = departmentMap[departmentKr] || departmentKr;
 
   const html = `
 <table style="width:100%; border-top:1px solid; font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size:11px; line-height:1.4; text-align:left; border-collapse:collapse; margin-top:30px;">
   <tr><td height="10"></td></tr>
-  <tr>
-    <td><b>${name} &nbsp;|&nbsp; JAYE</b></td>
-  </tr>
-  <tr>
-    <td>${title} - DESIGN TEAM</td>
-  </tr>
+  <tr><td><b>${name} &nbsp;|&nbsp; JAYE</b></td></tr>
+  <tr><td>${titleKr} (${titleEn}) - ${departmentEn}</td></tr>
   <tr><td height="10"></td></tr>
   <tr>
     <td>
@@ -190,18 +155,12 @@ function generateSignature() {
       <a href="mailto:${email}" style="opacity:0.75; color:inherit; text-decoration:none;">${email.toUpperCase()}</a>
     </td>
   </tr>
-  <tr>
-    <td style="opacity:0.75;">6F, 11, TEHERAN-RO 98-GIL, GANGNAM-GU, SEOUL, KOREA</td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://seoularena.net" style="opacity:0.75; color:inherit; text-decoration:none;">SEOULARENA.NET</a>
-    </td>
-  </tr>
+  <tr><td style="opacity:0.75;">6F, 11, TEHERAN-RO 98-GIL, GANGNAM-GU, SEOUL, KOREA</td></tr>
+  <tr><td>
+    <a href="https://seoularena.net" style="opacity:0.75; color:inherit; text-decoration:none;">SEOULARENA.NET</a>
+  </td></tr>
   <tr><td height="10"></td></tr>
-  <tr>
-    <td style="opacity:0.75;"><b>(주) 서울아레나</b> &nbsp;|&nbsp; 서울시 강남구 테헤란로 98길 11, 6층</td>
-  </tr>
+  <tr><td style="opacity:0.75;"><b>(주) 서울아레나</b> &nbsp;|&nbsp; 서울시 강남구 테헤란로 98길 11, 6층</td></tr>
 </table>`.trim();
 
   document.getElementById("signatureOutput").value = html;
@@ -223,6 +182,8 @@ function toggleMode() {
   modeBtn.textContent = body.classList.contains("dark") ? "라이트모드" : "다크모드";
 }
 
+// 초기화
+updateDepartments();
 generateSignature();
 </script>
 
