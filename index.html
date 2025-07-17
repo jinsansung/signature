@@ -152,7 +152,7 @@
     <button class="mode-btn" onclick="toggleMode()">다크모드</button>
   </div>
   <div id="signaturePreview">
-  </div></div>
+  </div>
 </div>
 
 <script>
@@ -171,41 +171,41 @@ function generateSignature() {
   const phone = document.getElementById("phone").value || "010-0000-0000";
   const email = document.getElementById("email").value || "gildong.arena@kakaocorp.com";
 
+  const phoneInternational = "+82 " + phone.replace(/^010-/, "10-");
+
   const html = `
-<div dir="auto" style="font-family: -apple-system, Helvetica, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;"><br>
-  <hr style="width: 100%; border: 0; border-top: 1px solid #999">
-  <br>
-  <span style="font-size: 0.9em;"><b>${name}</b></span>
-  <span style="font-size: 0.75em;">${title}</span><br>
-  <span style="font-size: 0.75em; opacity: 0.75;">${department} &nbsp;| &nbsp;</span>
-  <span style="font-size: 0.75em; opacity: 0.75;">M. ${phone} &nbsp;E. ${email}</span><br>
-  <span style="font-size: 0.75em; opacity: 0.75;"><b>(주)서울아레나</b> &nbsp;| &nbsp;</span>
-  <span style="font-size: 0.75em; opacity: 0.75;">서울시 강남구 테헤란로98길 11 EG빌딩 6층, 06181</span>
-</div>`.trim();
-
-  const previewMessage = `
-
-    <div style="transform: scale(0.8); transform-origin: top left; width: calc(100% / 0.8); display: inline-block;">
-<div style="
-  font-size: 1em;
-  line-height: 1.6;
-  margin-bottom: 24px;
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,1));
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,1));
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-">
-  추가로 필요하신 사항 있으시면<br>
-  언제든 회신 부탁드립니다.<br>
-</div>
-<div style="font-size: 1em; line-height: 1.6; font-weight: 500;">고맙습니다.<br>
-  ${name} 드림
-</div>`;
+<table style="width:100%; border-top:1px solid; font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size:11px; line-height:1.4; text-align:left; border-collapse:collapse; margin-top:30px;">
+  <tr><td height="10"></td></tr>
+  <tr>
+    <td><b>${name} &nbsp;|&nbsp; JAYE</b></td>
+  </tr>
+  <tr>
+    <td>${title} - DESIGN TEAM</td>
+  </tr>
+  <tr><td height="10"></td></tr>
+  <tr>
+    <td>
+      <a href="tel:${phoneInternational.replace(/ /g, '')}" style="opacity:0.75; color:inherit; text-decoration:none;">${phoneInternational}</a>
+      <span style="opacity:0.75;">&nbsp;|&nbsp;</span>
+      <a href="mailto:${email}" style="opacity:0.75; color:inherit; text-decoration:none;">${email.toUpperCase()}</a>
+    </td>
+  </tr>
+  <tr>
+    <td style="opacity:0.75;">6F, 11, TEHERAN-RO 98-GIL, GANGNAM-GU, SEOUL, KOREA</td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://seoularena.net" style="opacity:0.75; color:inherit; text-decoration:none;">SEOULARENA.NET</a>
+    </td>
+  </tr>
+  <tr><td height="10"></td></tr>
+  <tr>
+    <td style="opacity:0.75;"><b>(주) 서울아레나</b> &nbsp;|&nbsp; 서울시 강남구 테헤란로 98길 11, 6층</td>
+  </tr>
+</table>`.trim();
 
   document.getElementById("signatureOutput").value = html;
-  document.getElementById("signaturePreview").innerHTML = previewMessage + html;
+  document.getElementById("signaturePreview").innerHTML = html;
 }
 
 function copyToClipboard(button) {
